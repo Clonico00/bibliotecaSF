@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Libro index{% endblock %}
+{% block title %}Libros{% endblock %}
 
 {% block body %}
-    <h1>Libro index</h1>
+    <h1>Libros</h1>
 
     <table class="table">
         <thead>
@@ -14,7 +14,7 @@
                 <th>Editorial</th>
                 <th>Genero</th>
                 <th>Numero_ejemplares</th>
-                <th>actions</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -27,17 +27,18 @@
                 <td>{{ libro.genero }}</td>
                 <td>{{ libro.numeroEjemplares }}</td>
                 <td>
-                    <a href="{{ path('app_libro_show', {'id': libro.id}) }}">show</a>
-                    <a href="{{ path('app_libro_edit', {'id': libro.id}) }}">edit</a>
+                    <a href="{{ path('app_libro_show', {'id': libro.id}) }}">Ver | </a>
+                    <a href="{{ path('app_libro_edit', {'id': libro.id}) }}">Editar </a>
+
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">No hay ningun registro</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_libro_new') }}">Create new</a>
+    <a href="{{ path('app_libro_new') }}">Crear nuevo</a>
 {% endblock %}

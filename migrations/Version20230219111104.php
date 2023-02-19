@@ -27,6 +27,7 @@ final class Version20230219111104 extends AbstractMigration
         $this->addSql('ALTER TABLE ejemplar ADD CONSTRAINT FK_36B9726C0238522 FOREIGN KEY (libro_id) REFERENCES libro (id)');
         $this->addSql('ALTER TABLE prestamo ADD CONSTRAINT FK_F4D874F2DA04E6A9 FOREIGN KEY (socio_id) REFERENCES socio (id)');
         $this->addSql('ALTER TABLE prestamo ADD CONSTRAINT FK_F4D874F2BEE15B6C FOREIGN KEY (ejemplar_id) REFERENCES ejemplar (id)');
+
     }
 
     public function down(Schema $schema): void

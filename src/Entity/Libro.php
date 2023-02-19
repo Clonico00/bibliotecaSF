@@ -4,8 +4,12 @@ namespace App\Entity;
 
 use App\Repository\LibroRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 #[ORM\Entity(repositoryClass: LibroRepository::class)]
+#[ORM\Table(name: 'libro', uniqueConstraints: [new ORM\UniqueConstraint(name: 'titulo_autor_idx', columns: ['titulo', 'autor'])])]
+#[UniqueEntity(fields: ['titulo', 'autor'])]
 class Libro
 {
     #[ORM\Id]
