@@ -78,4 +78,9 @@ class Ejemplar
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->getLibro()->getTitulo();
+    }
 }

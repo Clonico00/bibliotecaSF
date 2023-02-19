@@ -3,3 +3,12 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+# config/routes.yaml
+
+app_homepage:
+    path: /
+    controller: App\Controller\DashboardController::index
+
+dashboard:
+    path: /dashboard
+    controller: App\Controller\DashboardController::index
