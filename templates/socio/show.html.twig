@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Socio{% endblock %}
+
+{% block body %}
+    <h1>Socio</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ socio.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ socio.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Apellidos</th>
+                <td>{{ socio.apellidos }}</td>
+            </tr>
+            <tr>
+                <th>Correo</th>
+                <td>{{ socio.correo }}</td>
+            </tr>
+            <tr>
+                <th>Telefono</th>
+                <td>{{ socio.telefono }}</td>
+            </tr>
+            <tr>
+                <th>Direccion</th>
+                <td>{{ socio.direccion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_socio_index') }}">back to list</a>
+
+    <a href="{{ path('app_socio_edit', {'id': socio.id}) }}">edit</a>
+
+    {{ include('socio/_delete_form.html.twig') }}
+{% endblock %}

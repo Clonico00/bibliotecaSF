@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ejemplar index{% endblock %}
+
+{% block body %}
+    <h1>Ejemplar index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Estado</th>
+                <th>Estanteria</th>
+                <th>Edicion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ejemplar in ejemplars %}
+            <tr>
+                <td>{{ ejemplar.id }}</td>
+                <td>{{ ejemplar.estado }}</td>
+                <td>{{ ejemplar.estanteria }}</td>
+                <td>{{ ejemplar.edicion }}</td>
+                <td>
+                    <a href="{{ path('app_ejemplar_show', {'id': ejemplar.id}) }}">show</a>
+                    <a href="{{ path('app_ejemplar_edit', {'id': ejemplar.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_ejemplar_new') }}">Create new</a>
+{% endblock %}
