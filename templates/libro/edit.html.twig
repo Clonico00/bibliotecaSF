@@ -1,64 +1,76 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Editar Libro{% endblock %}
-
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .form-container {
+            margin: 0 20%;
+        }
+    </style>
+{% endblock %}
 {% block body %}
-    <h1>Editar Libro</h1>
+    <div class="form-container">
+        <h1>Editar Libro</h1>
 
-    {{ form_start(form) }}
-    {% if form_errors(form.titulo) %}
-        <div class="alert alert-danger">
-            {{ form_errors(form.titulo) }}
+        {{ form_start(form) }}
+        {% if form_errors(form.titulo) %}
+            <div class="alert alert-danger">
+                {{ form_errors(form.titulo) }}
+            </div>
+        {% endif %}
+        <div class="form-group">
+            {{ form_label(form.titulo) }}
+            {{ form_widget(form.titulo, {'attr': {'class': 'form-control'}}) }}
         </div>
-    {% endif %}
-    <div class="form-group">
-        {{ form_label(form.titulo) }}
-        {{ form_widget(form.titulo, {'attr': {'class': 'form-control'}}) }}
+
+        {% if form_errors(form.autor) %}
+            <div class="alert alert-danger">
+                {{ form_errors(form.autor) }}
+            </div>
+        {% endif %}
+        <div class="form-group">
+            {{ form_label(form.autor) }}
+            {{ form_widget(form.autor, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {% if form_errors(form.editorial) %}
+            <div class="alert alert-danger">
+                {{ form_errors(form.editorial) }}
+            </div>
+        {% endif %}
+        <div class="form-group">
+            {{ form_label(form.editorial) }}
+            {{ form_widget(form.editorial, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {% if form_errors(form.genero) %}
+            <div class="alert alert-danger">
+                {{ form_errors(form.genero) }}
+            </div>
+        {% endif %}
+        <div class="form-group">
+            {{ form_label(form.genero) }}
+            {{ form_widget(form.genero, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {% if form_errors(form.numero_ejemplares) %}
+            <div class="alert alert-danger">
+                {{ form_errors(form.numero_ejemplares) }}
+            </div>
+        {% endif %}
+        <div class="form-group">
+            {{ form_label(form.numero_ejemplares) }}
+            {{ form_widget(form.numero_ejemplares, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Editar</button>
+            {{ form_end(form) }}
+            <a href="{{ path('app_libro_index') }}">Volver</a>
+
+            {{ include('libro/_delete_form.html.twig') }}
+        </div>
     </div>
 
-    {% if form_errors(form.autor) %}
-        <div class="alert alert-danger">
-            {{ form_errors(form.autor) }}
-        </div>
-    {% endif %}
-    <div class="form-group">
-        {{ form_label(form.autor) }}
-        {{ form_widget(form.autor, {'attr': {'class': 'form-control'}}) }}
-    </div>
 
-    {% if form_errors(form.editorial) %}
-        <div class="alert alert-danger">
-            {{ form_errors(form.editorial) }}
-        </div>
-    {% endif %}
-    <div class="form-group">
-        {{ form_label(form.editorial) }}
-        {{ form_widget(form.editorial, {'attr': {'class': 'form-control'}}) }}
-    </div>
-
-    {% if form_errors(form.genero) %}
-        <div class="alert alert-danger">
-            {{ form_errors(form.genero) }}
-        </div>
-    {% endif %}
-    <div class="form-group">
-        {{ form_label(form.genero) }}
-        {{ form_widget(form.genero, {'attr': {'class': 'form-control'}}) }}
-    </div>
-
-    {% if form_errors(form.numero_ejemplares) %}
-        <div class="alert alert-danger">
-            {{ form_errors(form.numero_ejemplares) }}
-        </div>
-    {% endif %}
-    <div class="form-group">
-        {{ form_label(form.numero_ejemplares) }}
-        {{ form_widget(form.numero_ejemplares, {'attr': {'class': 'form-control'}}) }}
-    </div>
-
-    <button type="submit" class="btn btn-primary">Editar</button>
-    {{ form_end(form) }}
-    <a href="{{ path('app_libro_index') }}">Volver</a>
-
-    {{ include('libro/_delete_form.html.twig') }}
 {% endblock %}
