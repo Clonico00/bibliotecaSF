@@ -1,11 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Prestamo{% endblock %}
+{% block title %}Nuevo Prestamo{% endblock %}
 
 {% block body %}
-    <h1>Create new Prestamo</h1>
+    <h1>Crear nuevo prestamo</h1>
 
-    {{ include('prestamo/_form.html.twig') }}
+    {{ form_start(form) }}
+    {% if form_errors(form.socio) %}
+        <div class="alert alert-danger">
+            {{ form_errors(form.socio) }}
+        </div>
+    {% endif %}
+    <div class="form-group">
+        {{ form_label(form.socio) }}
+        {{ form_widget(form.socio, {'attr': {'class': 'form-control'}}) }}
+    </div>
 
-    <a href="{{ path('app_prestamo_index') }}">back to list</a>
+    {% if form_errors(form.ejemplar) %}
+        <div class="alert alert-danger">
+            {{ form_errors(form.ejemplar) }}
+        </div>
+    {% endif %}
+    <div class="form-group">
+        {{ form_label(form.ejemplar) }}
+        {{ form_widget(form.ejemplar, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    {% if form_errors(form.fecha_devolucion) %}
+        <div class="alert alert-danger">
+            {{ form_errors(form.fecha_devolucion) }}
+        </div>
+    {% endif %}
+    <div class="form-group">
+        {{ form_label(form.fecha_devolucion) }}
+        {{ form_widget(form.fecha_devolucion, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    {% if form_errors(form.fecha_retiro) %}
+        <div class="alert alert-danger">
+            {{ form_errors(form.fecha_retiro) }}
+        </div>
+    {% endif %}
+    <div class="form-group">
+        {{ form_label(form.fecha_retiro) }}
+        {{ form_widget(form.fecha_retiro, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    {{ form_end(form) }}
+    <a href="{{ path('app_prestamo_index') }}">Volver</a>
 {% endblock %}

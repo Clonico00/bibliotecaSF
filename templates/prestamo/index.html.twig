@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Prestamo index{% endblock %}
+{% block title %}Prestamos{% endblock %}
 
 {% block body %}
-    <h1>Prestamo index</h1>
+    <h1>Prestamos</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Fecha_devolucion</th>
-                <th>Fecha_retiro</th>
-                <th>actions</th>
+                <th>Fecha Devolucion</th>
+                <th>Fecha Retiro</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -27,11 +27,11 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">No hay ningun registro</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_prestamo_new') }}">Create new</a>
+    <a href="{{ path('app_prestamo_new') }}">Crear nuevo</a>
 {% endblock %}

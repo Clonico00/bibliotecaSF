@@ -5,11 +5,15 @@ namespace App\Controller;
 use App\Entity\Libro;
 use App\Form\LibroType;
 use App\Repository\LibroRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+/**
+ * @Route("/libros", name="app_libros")
+ * @IsGranted("ROLE_USER")
+ */
 #[Route('/libro')]
 class LibroController extends AbstractController
 {

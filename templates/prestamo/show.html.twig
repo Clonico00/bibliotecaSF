@@ -12,19 +12,19 @@
                 <td>{{ prestamo.id }}</td>
             </tr>
             <tr>
-                <th>Fecha_devolucion</th>
+                <th>Fecha Devolucion</th>
                 <td>{{ prestamo.fechaDevolucion ? prestamo.fechaDevolucion|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>Fecha_retiro</th>
+                <th>Fecha Retiro</th>
                 <td>{{ prestamo.fechaRetiro ? prestamo.fechaRetiro|date('Y-m-d') : '' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_prestamo_index') }}">back to list</a>
+    <a href="{{ path('app_prestamo_index') }}">Volver</a>
 
-    <a href="{{ path('app_prestamo_edit', {'id': prestamo.id}) }}">edit</a>
+    <a href="{{ path('app_prestamo_edit', {'id': prestamo.id}) }}">Editar</a>
 
     {{ include('prestamo/_delete_form.html.twig') }}
 {% endblock %}

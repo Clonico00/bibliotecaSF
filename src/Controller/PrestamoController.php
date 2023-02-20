@@ -5,11 +5,15 @@ namespace App\Controller;
 use App\Entity\Prestamo;
 use App\Form\PrestamoType;
 use App\Repository\PrestamoRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+/**
+ * @Route("/libros", name="app_libros")
+ * @IsGranted("ROLE_USER")
+ */
 #[Route('/prestamo')]
 class PrestamoController extends AbstractController
 {
