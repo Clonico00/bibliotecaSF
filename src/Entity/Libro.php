@@ -101,4 +101,10 @@ class Libro
         return $this->getTitulo();
     }
 
+    public function getEjemplares() {
+        /*buscamos todos los ejemplares que tengan este libro*/
+
+
+    }
+
 }

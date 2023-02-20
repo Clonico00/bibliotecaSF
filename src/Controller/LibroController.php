@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Libro;
 use App\Form\LibroType;
+use App\Repository\EjemplarRepository;
 use App\Repository\LibroRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,12 +73,26 @@ class LibroController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_libro_delete', methods: ['POST'])]
-    public function delete(Request $request, Libro $libro, LibroRepository $libroRepository): Response
+    public function delete(Request $request, Libro $libro, EjemplarRepository $ejemplarRepository,EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$libro->getId(), $request->request->get('_token'))) {
-            $libroRepository->remove($libro, true);
+        // Buscar los ejemplares asociados al libro
+        $ejemplares = $ejemplarRepository->findBy(['libro' => $libro]);
+
+        //si tiene ejemplares no se puede borrar
+
+        if ($ejemplares) {
+            $this->addFlash('error', 'El libro no se puede borrar porque tiene ejemplares asociados.');
+            return $this->redirectToRoute('app_libro_index');
         }
 
-        return $this->redirectToRoute('app_libro_index', [], Response::HTTP_SEE_OTHER);
+        $entityManager->remove($libro);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'El libro ha sido borrado.');
+
+        return $this->redirectToRoute('app_libro_index');
     }
+
+
+
 }
