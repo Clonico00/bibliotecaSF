@@ -9,6 +9,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Socio</th>
                 <th>Fecha Devolucion</th>
                 <th>Fecha Retiro</th>
                 <th>Acciones</th>
@@ -18,11 +19,12 @@
         {% for prestamo in prestamos %}
             <tr>
                 <td>{{ prestamo.id }}</td>
+                <td>{{ prestamo.socio }}</td>
                 <td>{{ prestamo.fechaDevolucion ? prestamo.fechaDevolucion|date('Y-m-d') : '' }}</td>
                 <td>{{ prestamo.fechaRetiro ? prestamo.fechaRetiro|date('Y-m-d') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_prestamo_show', {'id': prestamo.id}) }}">show</a>
-                    <a href="{{ path('app_prestamo_edit', {'id': prestamo.id}) }}">edit</a>
+                    <a href="{{ path('app_prestamo_show', {'id': prestamo.id}) }}">Ver</a>
+                    <a href="{{ path('app_prestamo_edit', {'id': prestamo.id}) }}">Editar</a>
                 </td>
             </tr>
         {% else %}
