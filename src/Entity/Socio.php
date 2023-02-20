@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\SocioRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: SocioRepository::class)]
+#[ORM\Table(name: 'socio', uniqueConstraints: [new ORM\UniqueConstraint(name: 'nombre_correo_idx', columns: ['nombre', 'correo'])])]
+#[UniqueEntity(fields: ['nombre', 'correo'])]
 class Socio
 {
     #[ORM\Id]

@@ -1,11 +1,60 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Socio{% endblock %}
+{% block title %}Nuevo Socio{% endblock %}
 
 {% block body %}
-    <h1>Create new Socio</h1>
+    <h1>Crear nuevo Socio</h1>
 
-    {{ include('socio/_form.html.twig') }}
+    {{ form_start(form) }}
+    {% if form_errors(form.nombre) %}
+        <div class="alert alert-danger">
+            {{ form_errors(form.nombre) }}
+        </div>
+    {% endif %}
+    <div class="form-group">
+        {{ form_label(form.nombre) }}
+        {{ form_widget(form.nombre, {'attr': {'class': 'form-control'}}) }}
+    </div>
 
-    <a href="{{ path('app_socio_index') }}">back to list</a>
+    {% if form_errors(form.apellidos) %}
+        <div class="alert alert-danger">
+            {{ form_errors(form.apellidos) }}
+        </div>
+    {% endif %}
+    <div class="form-group">
+        {{ form_label(form.apellidos) }}
+        {{ form_widget(form.apellidos, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    {% if form_errors(form.correo) %}
+        <div class="alert alert-danger">
+            {{ form_errors(form.correo) }}
+        </div>
+    {% endif %}
+    <div class="form-group">
+        {{ form_label(form.correo) }}
+        {{ form_widget(form.correo, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    {% if form_errors(form.telefono) %}
+        <div class="alert alert-danger">
+            {{ form_errors(form.telefono) }}
+        </div>
+    {% endif %}
+    <div class="form-group">
+        {{ form_label(form.telefono) }}
+        {{ form_widget(form.telefono, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    {% if form_errors(form.direccion) %}
+        <div class="alert alert-danger">
+            {{ form_errors(form.direccion) }}
+        </div>
+    {% endif %}
+    <div class="form-group">
+        {{ form_label(form.direccion) }}
+        {{ form_widget(form.direccion, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    {{ form_end(form) }}
+    <a href="{{ path('app_socio_index') }}">Volver</a>
 {% endblock %}
