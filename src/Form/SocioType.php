@@ -23,34 +23,36 @@ class SocioType extends AbstractType
                 'constraints' => [
                     new NotBlank(),
                     new Length(['min' => 1, 'max' => 255]),
-                    new Regex(['pattern' => '/^[a-zA-Z ]+$/'])
+                    new Regex(['pattern' => '/^[a-zA-Z ]+$/', 'message' => 'El nombre solo puede contener letras'])
                 ]
             ])
             ->add('apellidos', Texttype::class, [
                 'constraints' => [
                     new NotBlank(),
                     new Length(['min' => 1, 'max' => 255]),
-                    new Regex(['pattern' => '/^[a-zA-Z ]+$/'])
+                    new Regex(['pattern' => '/^[a-zA-Z ]+$/', 'message' => 'Los apellidos solo pueden contener letras'])
                 ]
             ])
             ->add('correo', EmailType::class, [
                 'constraints' => [
                     new NotBlank(),
-                    new Length(['min' => 5, 'max' => 255])
+                    new Length(['min' => 5, 'max' => 255]),
+                    new Email(),
+                    new Regex(['pattern' => '/^[a-zA-Z0-9@. ]+$/', 'message' => 'El correo solo puede contener letras, números y los símbolos @ y .']),
                 ],
             ])
             ->add('telefono', TelType::class, [
                 'constraints' => [
                     new NotBlank(),
                     new Length(['min' => 8, 'max' => 10]),
-                    new Regex(['pattern' => '/^[0-9]+$/']),
+                    new Regex(['pattern' => '/^[0-9]+$/', 'message' => 'El teléfono solo puede contener números']),
                 ],
             ])
             ->add('direccion', TextType::class, [
                 'constraints' => [
                     new NotBlank(),
                     new Length(['min' => 1, 'max' => 255]),
-                    new Regex(['pattern' => '/^[a-zA-Z0-9 ]+$/'])
+                    new Regex(['pattern' => '/^[a-zA-Z0-9 ]+$/', 'message' => 'La dirección solo puede contener letras y números'])
                 ]
             ])
         ;

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Ejemplar;
 use App\Form\EjemplarType;
 use App\Repository\EjemplarRepository;
+use App\Repository\PrestamoRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,12 +72,24 @@ class EjemplarController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_ejemplar_delete', methods: ['POST'])]
-    public function delete(Request $request, Ejemplar $ejemplar, EjemplarRepository $ejemplarRepository): Response
+    public function delete(Request $request, Ejemplar $ejemplar, EjemplarRepository $ejemplarRepository, PrestamoRepository $prestamoRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$ejemplar->getId(), $request->request->get('_token'))) {
-            $ejemplarRepository->remove($ejemplar, true);
+        // Verifica si el ejemplar está prestado
+        $prestamos = $prestamoRepository->findBy(['ejemplar' => $ejemplar]);
+
+        if ($prestamos) {
+            $this->addFlash('error', 'No se puede eliminar el ejemplar porque está prestado.');
+
+        } else {
+            if ($this->isCsrfTokenValid('delete'.$ejemplar->getId(), $request->request->get('_token'))) {
+                $ejemplarRepository->remove($ejemplar, true);
+                $this->addFlash('success', 'El ejemplar se eliminó correctamente.');
+            } else {
+                $this->addFlash('error', 'El token CSRF es inválido.');
+            }
         }
 
         return $this->redirectToRoute('app_ejemplar_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }

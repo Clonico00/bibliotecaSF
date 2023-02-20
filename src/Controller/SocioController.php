@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Socio;
 use App\Form\SocioType;
+use App\Repository\PrestamoRepository;
 use App\Repository\SocioRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -67,12 +68,21 @@ class SocioController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_socio_delete', methods: ['POST'])]
-    public function delete(Request $request, Socio $socio, SocioRepository $socioRepository): Response
+    public function delete(Request $request, Socio $socio, SocioRepository $socioRepository, PrestamoRepository $prestamoRepository): Response
     {
+        $prestamos = $prestamoRepository->findBy(['socio' => $socio]);
+
+        if (!empty($prestamos)) {
+            $this->addFlash('error', 'No se puede eliminar el socio porque tiene préstamos asociados.');
+            return $this->redirectToRoute('app_socio_index', [], Response::HTTP_SEE_OTHER);
+        }
+
         if ($this->isCsrfTokenValid('delete'.$socio->getId(), $request->request->get('_token'))) {
             $socioRepository->remove($socio, true);
         }
 
         return $this->redirectToRoute('app_socio_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
 }

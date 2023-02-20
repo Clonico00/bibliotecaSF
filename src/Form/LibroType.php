@@ -22,34 +22,34 @@ class LibroType extends AbstractType
                 'constraints' => [
                     new NotBlank(),
                     new Length(['min' => 1, 'max' => 255]),
-                    new Regex(['pattern' => '/^[a-zA-Z0-9 ]+$/'])
+                    new Regex(['pattern' => '/^[a-zA-Z0-9 ]+$/', 'message' => 'El título solo puede contener letras y números'])
                 ]
             ])
             ->add('autor', Texttype::class, [
                 'constraints' => [
                     new NotBlank(),
                     new Length(['min' => 1, 'max' => 255]),
-                    new Regex(['pattern' => '/^[a-zA-Z ]+$/'])
+                    new Regex(['pattern' => '/^[a-zA-Z ]+$/', 'message' => 'El nombre del autor solo puede contener letras'])
                 ]
             ])
             ->add('editorial', TextType::class, [
                 'constraints' => [
                     new NotBlank(),
                     new Length(['min' => 1, 'max' => 255]),
-                    new Regex(['pattern' => '/^[a-zA-Z0-9 ]+$/'])
+                    new Regex(['pattern' => '/^[a-zA-Z0-9 ]+$/', 'message' => 'El nombre de la editorial solo puede contener letras y números'])
                 ]
             ])
             ->add('genero', TextType::class, [
                 'constraints' => [
                     new NotBlank(),
                     new Length(['min' => 1, 'max' => 255]),
-                    new Regex(['pattern' => '/^[a-zA-Z]+$/'])
+                    new Regex(['pattern' => '/^[a-zA-Z]+$/', 'message' => 'El género solo puede contener letras'])
                 ]
             ])
             ->add('numero_ejemplares', IntegerType::class, [
                 'constraints' => [
                     new NotBlank(),
-                    new GreaterThan(0)
+                    new GreaterThan(['value' => 0, 'message' => 'El número de ejemplares debe ser mayor que 0'])
                 ]
             ])
         ;

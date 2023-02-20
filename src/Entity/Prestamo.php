@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\PrestamoRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 #[ORM\Entity(repositoryClass: PrestamoRepository::class)]
 class Prestamo
@@ -80,4 +82,6 @@ class Prestamo
 
         return $this;
     }
+
+
 }

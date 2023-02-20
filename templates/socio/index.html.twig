@@ -4,7 +4,11 @@
 
 {% block body %}
     <h1>Socios</h1>
-
+    {% if app.flashes('error') is not empty %}
+        <div class="alert alert-danger">
+            No se ha podido eliminar el socio porque tiene préstamos asociados.
+        </div>
+    {% endif %}
     <table class="table">
         <thead>
             <tr>

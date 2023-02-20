@@ -10,6 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Socio</th>
+                <th>Ejemplar</th>
                 <th>Fecha Devolucion</th>
                 <th>Fecha Retiro</th>
                 <th>Acciones</th>
@@ -20,6 +21,7 @@
             <tr>
                 <td>{{ prestamo.id }}</td>
                 <td>{{ prestamo.socio }}</td>
+                <td>{{ prestamo.ejemplar }}</td>
                 <td>{{ prestamo.fechaDevolucion ? prestamo.fechaDevolucion|date('Y-m-d') : '' }}</td>
                 <td>{{ prestamo.fechaRetiro ? prestamo.fechaRetiro|date('Y-m-d') : '' }}</td>
                 <td>

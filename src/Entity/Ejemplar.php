@@ -83,4 +83,6 @@ class Ejemplar
     {
         return $this->getLibro()->getTitulo();
     }
+
+
 }
