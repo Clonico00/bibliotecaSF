@@ -23,12 +23,16 @@
                 <th>Edicion</th>
                 <td>{{ ejemplar.edicion }}</td>
             </tr>
+            <tr>
+                <th>Libro</th>
+                <td>{{ ejemplar.libro }}</td>
+            </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_ejemplar_index') }}">back to list</a>
+    <a href="{{ path('app_ejemplar_index') }}">Volver</a>
 
-    <a href="{{ path('app_ejemplar_edit', {'id': ejemplar.id}) }}">edit</a>
+    <a href="{{ path('app_ejemplar_edit', {'id': ejemplar.id}) }}">Editar</a>
 
     {{ include('ejemplar/_delete_form.html.twig') }}
 {% endblock %}

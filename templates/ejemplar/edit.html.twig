@@ -5,9 +5,51 @@
 {% block body %}
     <h1>Edit Ejemplar</h1>
 
-    {{ include('ejemplar/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ form_start(form) }}
+    {% if form_errors(form.estado) %}
+        <div class="alert alert-danger">
+            {{ form_errors(form.estado) }}
+        </div>
+    {% endif %}
+    <div class="form-group">
+        {{ form_label(form.estado) }}
+        {{ form_widget(form.estado, {'attr': {'class': 'form-control'}}) }}
+    </div>
 
-    <a href="{{ path('app_ejemplar_index') }}">back to list</a>
+    {% if form_errors(form.estanteria) %}
+        <div class="alert alert-danger">
+            {{ form_errors(form.estanteria) }}
+        </div>
+    {% endif %}
+    <div class="form-group">
+        {{ form_label(form.estanteria) }}
+        {{ form_widget(form.estanteria, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    {% if form_errors(form.edicion) %}
+        <div class="alert alert-danger">
+            {{ form_errors(form.edicion) }}
+        </div>
+    {% endif %}
+    <div class="form-group">
+        {{ form_label(form.edicion) }}
+        {{ form_widget(form.edicion, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    {% if form_errors(form.libro) %}
+        <div class="alert alert-danger">
+            {{ form_errors(form.libro) }}
+        </div>
+    {% endif %}
+    <div class="form-group">
+        {{ form_label(form.libro) }}
+        {{ form_widget(form.libro, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Editar</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('app_ejemplar_index') }}">Volver</a>
 
     {{ include('ejemplar/_delete_form.html.twig') }}
 {% endblock %}

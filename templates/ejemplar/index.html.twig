@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ejemplar index{% endblock %}
+{% block title %}Ejemplares{% endblock %}
 
 {% block body %}
-    <h1>Ejemplar index</h1>
+    <h1>Ejemplares</h1>
 
     <table class="table">
         <thead>
@@ -12,7 +12,8 @@
                 <th>Estado</th>
                 <th>Estanteria</th>
                 <th>Edicion</th>
-                <th>actions</th>
+                <th>Libro</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -22,18 +23,19 @@
                 <td>{{ ejemplar.estado }}</td>
                 <td>{{ ejemplar.estanteria }}</td>
                 <td>{{ ejemplar.edicion }}</td>
+                <td>{{ ejemplar.libro }}</td>
                 <td>
-                    <a href="{{ path('app_ejemplar_show', {'id': ejemplar.id}) }}">show</a>
-                    <a href="{{ path('app_ejemplar_edit', {'id': ejemplar.id}) }}">edit</a>
+                    <a href="{{ path('app_ejemplar_show', {'id': ejemplar.id}) }}">Ver</a>
+                    <a href="{{ path('app_ejemplar_edit', {'id': ejemplar.id}) }}">Editar</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">No hay ningun registro</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_ejemplar_new') }}">Create new</a>
+    <a href="{{ path('app_ejemplar_new') }}">Crear nuevo</a>
 {% endblock %}
