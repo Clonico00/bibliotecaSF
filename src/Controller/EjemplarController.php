@@ -30,6 +30,7 @@ class EjemplarController extends AbstractController
     public function new(Request $request, EjemplarRepository $ejemplarRepository): Response
     {
         $ejemplar = new Ejemplar();
+        $ejemplar->setEstado('disponible');
         $form = $this->createForm(EjemplarType::class, $ejemplar);
         $form->handleRequest($request);
 

@@ -34,7 +34,15 @@
             {{ form_label(form.ejemplar) }}
             {{ form_widget(form.ejemplar, {'attr': {'class': 'form-control'}}) }}
         </div>
-
+        {% if form_errors(form.fecha_retiro) %}
+            <div class="alert alert-danger">
+                {{ form_errors(form.fecha_retiro) }}
+            </div>
+        {% endif %}
+        <div class="form-group">
+            {{ form_label(form.fecha_retiro) }}
+            {{ form_widget(form.fecha_retiro, {'attr': {'class': 'form-control'}}) }}
+        </div>
         {% if form_errors(form.fecha_devolucion) %}
             <div class="alert alert-danger">
                 {{ form_errors(form.fecha_devolucion) }}
@@ -45,15 +53,7 @@
             {{ form_widget(form.fecha_devolucion, {'attr': {'class': 'form-control'}}) }}
         </div>
 
-        {% if form_errors(form.fecha_retiro) %}
-            <div class="alert alert-danger">
-                {{ form_errors(form.fecha_retiro) }}
-            </div>
-        {% endif %}
-        <div class="form-group">
-            {{ form_label(form.fecha_retiro) }}
-            {{ form_widget(form.fecha_retiro, {'attr': {'class': 'form-control'}}) }}
-        </div>
+
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Guardar</button>
             {{ form_end(form) }}

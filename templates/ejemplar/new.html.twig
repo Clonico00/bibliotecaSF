@@ -14,14 +14,9 @@
         <h1>Crear nuevo Ejemplar</h1>
 
         {{ form_start(form) }}
-        {% if form_errors(form.estado) %}
-            <div class="alert alert-danger">
-                {{ form_errors(form.estado) }}
-            </div>
-        {% endif %}
+
         <div class="form-group">
-            {{ form_label(form.estado) }}
-            {{ form_widget(form.estado, {'attr': {'class': 'form-control'}}) }}
+            {{ form_row(form.estado, { 'attr': {'style': 'display:none;'} }) }}
         </div>
 
         {% if form_errors(form.estanteria) %}

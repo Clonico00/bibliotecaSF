@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Ejemplar;
 use App\Entity\Prestamo;
 use App\Form\PrestamoType;
 use App\Repository\PrestamoRepository;
@@ -10,6 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
+
 /**
  * @Route("/libros", name="app_libros")
  * @IsGranted("ROLE_USER")
@@ -26,7 +29,7 @@ class PrestamoController extends AbstractController
     }
 
     #[Route('/new', name: 'app_prestamo_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, PrestamoRepository $prestamoRepository): Response
+    public function new(Request $request, PrestamoRepository $prestamoRepository,EntityManagerInterface $entityManager): Response
     {
         $prestamo = new Prestamo();
         $form = $this->createForm(PrestamoType::class, $prestamo);
@@ -35,7 +38,17 @@ class PrestamoController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $prestamoRepository->save($prestamo, true);
 
+            // Obtener el ID del ejemplar asociado al préstamo
+            $ejemplarId = $form->get('ejemplar')->getData()->getId();
+
+            $ejemplar = $entityManager->getRepository(Ejemplar::class)->find($ejemplarId);
+
+            // Actualizar el estado del ejemplar a "prestado"
+            $ejemplar->setEstado('prestado');
+            $entityManager->flush();
+
             return $this->redirectToRoute('app_prestamo_index', [], Response::HTTP_SEE_OTHER);
+
         }
 
         return $this->renderForm('prestamo/new.html.twig', [
@@ -71,12 +84,23 @@ class PrestamoController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_prestamo_delete', methods: ['POST'])]
-    public function delete(Request $request, Prestamo $prestamo, PrestamoRepository $prestamoRepository): Response
+    public function delete(Request $request, Prestamo $prestamo, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$prestamo->getId(), $request->request->get('_token'))) {
-            $prestamoRepository->remove($prestamo, true);
+            $entityManager->remove($prestamo);
+
+            // Obtener el ID del ejemplar asociado al préstamo
+            $ejemplarId = $prestamo->getEjemplar()->getId();
+
+            $ejemplar = $entityManager->getRepository(Ejemplar::class)->find($ejemplarId);
+
+            // Actualizar el estado del ejemplar a "disponible"
+            $ejemplar->setEstado('disponible');
+            $entityManager->flush();
         }
 
         return $this->redirectToRoute('app_prestamo_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
 }

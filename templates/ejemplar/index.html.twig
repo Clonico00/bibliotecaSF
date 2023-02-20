@@ -14,10 +14,10 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Libro</th>
                 <th>Estado</th>
                 <th>Estanteria</th>
                 <th>Edicion</th>
-                <th>Libro</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -25,10 +25,10 @@
         {% for ejemplar in ejemplars %}
             <tr>
                 <td>{{ ejemplar.id }}</td>
+                <td>{{ ejemplar.libro }}</td>
                 <td>{{ ejemplar.estado }}</td>
                 <td>{{ ejemplar.estanteria }}</td>
                 <td>{{ ejemplar.edicion }}</td>
-                <td>{{ ejemplar.libro }}</td>
                 <td>
                     <a href="{{ path('app_ejemplar_show', {'id': ejemplar.id}) }}">Ver</a>
                     <a href="{{ path('app_ejemplar_edit', {'id': ejemplar.id}) }}">Editar</a>

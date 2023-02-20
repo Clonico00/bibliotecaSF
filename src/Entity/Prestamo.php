@@ -20,7 +20,10 @@ class Prestamo
     #[ORM\JoinColumn(nullable: false)]
     private ?Socio $socio = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    /*@ORM\ManyToOne(targetEntity=Ejemplar::class, inversedBy="prestamos", cascade={"persist"})
+
+     * */
+    #[ORM\ManyToOne (targetEntity: Ejemplar::class, cascade: ["persist"], inversedBy: "prestamos")]
     #[ORM\JoinColumn(nullable: false)]
     private ?Ejemplar $ejemplar = null;
 

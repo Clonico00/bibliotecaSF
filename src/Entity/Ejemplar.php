@@ -6,6 +6,7 @@ use App\Repository\EjemplarRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EjemplarRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Ejemplar
 {
     #[ORM\Id]
@@ -18,13 +19,19 @@ class Ejemplar
     private ?Libro $libro = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $estado = null;
+    private ?string $estado = 'disponible';
 
     #[ORM\Column(length: 255)]
     private ?string $estanteria = null;
 
     #[ORM\Column(length: 255)]
     private ?string $edicion = null;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Prestamo::class, mappedBy="ejemplar", orphanRemoval=false)
+     */
+    private $prestamo;
+
 
     public function getId(): ?int
     {
@@ -84,5 +91,17 @@ class Ejemplar
         return $this->getLibro()->getTitulo();
     }
 
+    /**
+     * @ORM\PostUpdate()
+     * @ORM\PostPersist()
+     */
+    public function actualizarEstado(): void
+    {
+        if ($this->prestamo) {
+            $this->estado = 'prestado';
+        } else {
+            $this->estado = 'disponible';
+        }
+    }
 
 }
